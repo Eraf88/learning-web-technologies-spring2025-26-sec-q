@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <form id="profileForm">
+        <fieldset>
+            <legend>Profile Picture</legend>
+            
+            <label>User Id</label>
+            <input type="text" id="uid" name="userid" />
+            <br><br>
+
+            <label>Picture</label>
+            <input type="file" id="pic" name="profile_pic" />
+            
+            <hr>
+
+            <input type="submit" value="Submit" />
+        </fieldset>
+    </form>
+
+    <script>
+       
+        const profileForm = document.getElementById('profileForm');
+
+        profileForm.addEventListener('submit', function(event) {
+            
+            event.preventDefault();
+
+            
+            const userId = document.getElementById('uid');
+            const picture = document.getElementById('pic');
+
+            
+            if (userId === "") {
+                alert("User Id cannot be empty.");
+                return;
+            }
+
+            const idNum = Number(userId);
+            if (isNaN(idNum) || idNum <= 0) {
+                alert("User Id must be a positive number.");
+                return;
+            }
+
+            
+            if (picture === "") {
+                alert("Picture cannot be empty.");
+                return;
+            }
+
+            
+            alert("Success!");
+        });
+    </script>
+</body>
+</html>

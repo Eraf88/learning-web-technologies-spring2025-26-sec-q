@@ -6,11 +6,48 @@
     <title>Name Form</title>
 </head>
 <body>
-    <form>
+    <form id="name">
         Name <br>
-        <input type="text" name="username" value="" /> 
+        <input type="text" id="username" name="username" value="" /> 
         <br><br>
-        <input type="button" value="Submit" />
+        <input type="submit" value="Submit" />
     </form>
+
+    <script>
+        const nameForm = document.getElementById('name');
+
+        nameForm.addEventListener('submit', function(event) {
+            
+            event.preventDefault();
+
+    
+            const nameValue = document.getElementById('username').value.trim();
+
+            if (nameValue === "") {
+                alert("Name cannot be empty.");
+                return;
+            }
+
+            const firstChar = nameValue.charAt(0);
+            if (!(/[a-zA-Z]/.test(firstChar))) {
+                alert("Name must start with a letter.");
+                return;
+            }
+
+            const allowedChars = /^[a-zA-Z.\- ]+$/;
+            if (!allowedChars.test(nameValue)) {
+                alert("Name can only contain letters, dots or dashes.");
+                return;
+            }
+
+            const words = nameValue.split(' ').filter(word => word.length > 0);
+            if (words.length < 2) {
+                alert("Name must contain at least two words.");
+                return;
+            }
+
+            alert("Success");
+        });
+    </script>
 </body>
 </html>

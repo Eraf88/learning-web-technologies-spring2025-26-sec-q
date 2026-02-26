@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Group</title>
+</head>
+<body>
+    <form id="bloodGroupForm">
+        <label>Blood Group</label>
+        <select id="bloodGroup">
+            <option value="">---Select---</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+        </select>
+
+        <hr style="width: 200px; text-align: left; margin-left: 0;">
+
+        <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+      
+        const bloodForm = document.getElementById('bloodGroupForm');
+
+        bloodForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+           
+            const bloodSelect = document.getElementById('bloodGroup');
+            const selectedValue = bloodSelect.value;
+            if (selectedValue === "") {
+                alert("Validation Failed: Please select a blood group.");
+                return;
+            }
+            alert("Success");
+        });
+    </script>
+</body>
+</html>

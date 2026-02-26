@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoB Form</title>
+</head>
+<body>
+    <form id="dobForm">
+        <fieldset>
+            <legend>Date of Birth</legend>
+            <table>
+                <tr>
+                    <td>dd</td><td></td><td>mm</td><td></td><td>yyyy</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="day" size="2" /></td>
+                    <td>/</td>
+                    <td><input type="text" id="month" size="2" /></td>
+                    <td>/</td>
+                    <td><input type="text" id="year" size="4" /></td>
+                </tr>
+            </table>
+            <hr>
+            <input type="submit" value="Submit" />
+        </fieldset>
+    </form>
+
+    <script>
+        document.getElementById('dobForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            
+            const d = document.getElementById('day').value.trim();
+            const m = document.getElementById('month').value.trim();
+            const y = document.getElementById('year').value.trim();
+
+            
+            const dayNum = Number(d);
+            const monthNum = Number(m);
+            const yearNum = Number(y);
+
+            
+            if (isNaN(dayNum) || isNaN(monthNum) || isNaN(yearNum) || d === "" || m === "" || y === "") {
+                alert(" Please enter valid numbers.");
+                return;
+            }
+
+            if (dayNum < 0 || dayNum > 31) {
+                alert("Day must be 0-31");
+            } else if (monthNum < 1 || monthNum > 12) {
+                alert("Month must be 1-12");
+            } else if (yearNum < 1900 || yearNum > 2016) {
+                alert("Year must be 1900-2016");
+            } else {
+                alert("Success.");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Profile Form</title>
+</head>
+<body>
+
+    <form id="profileForm">
+        <table border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th colspan="3" align="center">
+                        <h2>PERSON PROFILE</h2>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" id="username" name="username" style="width: 90%;" /></td>
+                    <td width="30"></td>
+                </tr>
+
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" id="useremail" name="useremail" style="width: 90%;" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" name="gender" value="male" /> Male
+                        <input type="radio" name="gender" value="female" /> Female
+                        <input type="radio" name="gender" value="other" /> Other
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>
+                        <input type="text" id="day" size="2" /> / 
+                        <input type="text" id="month" size="2" /> / 
+                        <input type="text" id="year" size="4" /> 
+                        <i style="font-size: 12px; color: black;">(dd/mm/yyyy)</i>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Blood Group</td>
+                    <td>
+                        <select id="bloodGroup" name="bg">
+                            <option value="">---Select---</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="O+">O+</option>
+                        </select>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Degree</td>
+                    <td>
+                        <input type="checkbox" name="degree" value="ssc" /> SSC
+                        <input type="checkbox" name="degree" value="hsc" /> HSC
+                        <input type="checkbox" name="degree" value="bsc" /> BSc.
+                        <input type="checkbox" name="degree" value="msc" /> MSc.
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Photo</td>
+                    <td>
+                        <input type="file" id="pic" name="profile_pic" />
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" style="height: 30px;"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" align="right">
+                        <input type="submit" value="Submit" />
+                        <input type="reset" value="Reset" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <script>
+        const profileForm = document.getElementById('profileForm');
+
+        profileForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('username').value.trim();
+            const nameWords = name.split(' ').filter(w => w.length > 0);
+            if (name === "") { alert("Name cannot be empty"); return; }
+            if (nameWords.length < 2) { alert("Name must contain at least two words"); return; }
+            if (!/^[a-zA-Z]/.test(name)) { alert("Name must start with a letter"); return; }
+            if (!/^[a-zA-Z.\- ]+$/.test(name)) { alert("Name contains invalid characters"); return; }
+
+            const email = document.getElementById('useremail').value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === "") { alert("Email cannot be empty"); return; }
+            if (!emailPattern.test(email)) { alert("Invalid email format"); return; }
+
+        
+            const genderOptions = document.getElementsByName('gender');
+            let genderSelected = false;
+            for (let g of genderOptions) { if (g.checked) genderSelected = true; }
+            if (!genderSelected) { 
+                alert("Please select a gender"); 
+                return;
+             }
+
+           
+            const dd = Number(document.getElementById('day').value);
+            const mm = Number(document.getElementById('month').value);
+            const yyyy = Number(document.getElementById('year').value);
+            if (!dd || !mm || !yyyy) { 
+                alert("DOB fields cannot be empty");
+                 return;
+                 }
+            if (dd < 1 || dd > 31) {
+                 alert("Day must be 1-31"); 
+                 return;
+                 }
+            if (mm < 1 || mm > 12) { 
+                alert("Month must be 1-12"); 
+                return; 
+            }
+            if (yyyy < 1900 || yyyy > 2016) { 
+                alert("Year must be 1900-2016"); 
+                return; 
+            }
+
+          
+            if (document.getElementById('bloodGroup').value === "") {
+                alert("Please select a blood group"); 
+                return;
+            }
+
+            const degreeOptions = document.getElementsByName('degree');
+            let degreeChecked = false;
+            for (let d of degreeOptions) { if (d.checked) degreeChecked = true; }
+            if (!degreeChecked) { alert("Select at least one degree"); return; }
+
+           
+            if (document.getElementById('pic').value === "") {
+                alert("Please upload a photo"); 
+                return;
+            }
+
+            alert("SUCCESS!");
+        });
+    </script>
+</body>
+</html>

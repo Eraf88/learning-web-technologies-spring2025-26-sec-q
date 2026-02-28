@@ -104,14 +104,25 @@
             event.preventDefault();
             const name = document.getElementById('username').value.trim();
             const nameWords = name.split(' ').filter(w => w.length > 0);
-            if (name === "") { alert("Name cannot be empty"); return; }
-            if (nameWords.length < 2) { alert("Name must contain at least two words"); return; }
-            if (!/^[a-zA-Z]/.test(name)) { alert("Name must start with a letter"); return; }
-            if (!/^[a-zA-Z.\- ]+$/.test(name)) { alert("Name contains invalid characters"); return; }
+            if (name === "") { 
+                alert("Name cannot be empty"); 
+            return; 
+        }
+            if (nameWords.length < 2) { 
+                alert("Name must contain at least two words"); 
+            return; }
+            if (!/^[a-zA-Z]/.test(name)) { 
+                alert("Name must start with a letter"); 
+                return; }
+            if (!/^[a-zA-Z.\- ]+$/.test(name)) { 
+                alert("Name contains invalid characters");
+                 return; }
 
             const email = document.getElementById('useremail').value.trim();
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email === "") { alert("Email cannot be empty"); return; }
+            if (email === "") { alert("Email cannot be empty"); 
+            return; 
+        }
             if (!emailPattern.test(email)) { alert("Invalid email format"); return; }
 
         

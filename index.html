@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Performance</title>
+</head>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(to right, #4e73df, #1cc88a);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .calculator{
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+        width: 300px;
+    }
+
+    .calculator h2{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .calculator input[type="text"]{
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    .operations{
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .operations label{
+        margin-right: 10px;
+    }
+
+    .buttons{
+
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .buttons input{
+        padding: 8px 15px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+    }
+
+    .calculate-btn{
+        background-color: #4e73df;
+        color: white;
+    }
+    .reset-btn{
+        background-color: #e74a3b;
+        color: white;
+    }
+
+    .buttons input:hover{
+        opacity: 0.8;
+    }
+</style>
+<body>
+   <form id="calculatorForm" class="calculator">
+    <h2>Calculator</h2>
+
+    <input type="text" id="num1" placeholder="Enter your 1st Number: ">
+    <input type="text" id="num2" placeholder="Enter your 2nd Number: ">
+    <div class="operations">
+        <label>
+            <input type="radio" name="operation" value="add">+
+        </label>
+        <label>
+            <input type="radio" name="operation" value="sub">-
+        </label>
+        <label>
+            <input type="radio" name="operation" value="mul">*
+        </label>
+        <label>
+            <input type="radio" name="operation" value="div">/
+        </label>
+
+    </div>
+    <input type="text" id="result" placeholder="Result" readonly>
+    <div class="buttons">
+        <button type="button" class="clear" onclick="clearDisplay()">C</button>
+        <button type="button" class="operator" onclick="appendValue('/')">/</button>
+        <button type="button" class="operator" onclick="appendValue('*')">*</button>
+        <button type="button"  class="operator" onclick="appendValue('-')">-</button>
+
+        <button type="button" class="number" onclick="appendValue('7')">7</button>
+        <button type="button" class="number" onclick="appendValue('8')">8</button>
+        <button type="button" class="number" onclick="appendValue('9')">9</button>
+        <button type="button"  class="operator" onclick="appendValue('+')">+</button>
+
+        <button type="button" class="number" onclick="appendValue('4')">4</button>
+        <button type="button" class="number" onclick="appendValue('5')">5</button>
+        <button type="button" class="number" onclick="appendValue('6')">6</button>
+
+        <button type="button" class="number" onclick="appendValue('1')">1</button>
+        <button type="button" class="number" onclick="appendValue('2')">2</button>
+        <button type="button" class="number" onclick="appendValue('3')">3</button>
+
+        <button type="button" class="number" onclick="appendValue('0')">0</button>
+        <button type="button" class="number" onclick="appendValue('.')">.</button>
+        <button type="button" class="number" onclick="calculate()">=</button>
+    </div>
+   </form>
+
+   <script>
+    const calculatorForm = document.getElementById('calculatorForm');
+    calculatorForm.addEventListener('submit',function(event){
+        event.preventDefault();
+        const number1 = document.getElementById('num1').value.trim();
+        const number2 = document.getElementById('num2').value.trim();
+
+        if (number1 === "" || number2 === "") {
+            alert("Please enter both numbers")
+        }
+        if(isNan(number1) || isNaN(number2)){
+            alert("Only numeric values allowed");
+            return;
+        }
+
+        const n1 = parseFloat(number1);
+        const n2 = parseFloat(number2);
+
+        const operations = document.getElementsByName('operation');
+        let selectedOperation = null;
+
+        for(let op of operations) {
+            if (op.checked){
+                selectedOperation = op.value;
+            }
+        }
+
+        if(!selectedOperation){
+            alert("Select an operation");
+            return;
+        }
+        let answer;
+
+        switch(selectedOperation){
+            case "add":
+                answer = n1 + n2;
+                break;
+            case "sub":
+                answer = n1 - n2;
+                break;
+                case "mul":
+                answer = n1 * n2;
+                break;
+                case "div":
+                    if(n2 === 0){
+                        alert("Cannot divide by zero");
+                    }
+                answer = n1 / n2;
+                break;
+        }
+
+        document.getElementById('result').value = answer;
+    })
+   </script>
+</body>
+</html>

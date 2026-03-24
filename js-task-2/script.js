@@ -45,6 +45,7 @@ function checkWinner(){
             cells[a].classList.add("winner");
             cells[b].classList.add("winner");
             cells[c].classList.add("winner");
+            
         }
 
     }

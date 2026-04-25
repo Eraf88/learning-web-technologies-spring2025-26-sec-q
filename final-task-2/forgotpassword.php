@@ -2,11 +2,10 @@
     $error = "";
     $email = "";
 
-    // Handle form submission
+    
     if(isset($_REQUEST['submit'])){
         $email = $_REQUEST['email'];
 
-        // Basic validation
         if($email == ""){
             $error = "Email cannot be empty!";
         } else {

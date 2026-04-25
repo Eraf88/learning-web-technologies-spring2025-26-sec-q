@@ -1,77 +1,77 @@
-<?php 
-    session_start();
-    
-    $error = "";
-    $user_val = "";
-    
-    // Retrieve cookie if it exists
-    if(isset($_COOKIE['username'])){
-        $user_val = $_COOKIE['username'];
+<?php
+session_start();
+ 
+if (isset($_POST['submit'])) {
+ 
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+ 
+    if (isset($_SESSION['users'][$username]) &&
+        $_SESSION['users'][$username]['password'] == $password) {
+ 
+        $_SESSION['current_user'] = $username;
+ 
+        header("Location: dashboard.php");
+        exit();
+ 
+    } else {
+        echo "Invalid username or password!";
     }
-
-    // Process submission
-    if (isset($_REQUEST['submit'])) {
-        $username = $_REQUEST['username'];
-        $password = $_REQUEST['password'];
-
-        if($username == "" || $password == ""){
-            $error = "Need username or password";
-        } else {
-            // Login Logic
-            if($username == $password){
-                $_SESSION['status'] = true;
-                $_SESSION['username'] = $username;
-
-                // Handle "Remember Me" cookie
-                if(isset($_REQUEST['remember'])){
-                    setcookie('username', $username, time()+3600, '/');
-                }
-
-                // Redirect to dashboard
-                header('location: dashboard.php');
-                exit(); 
-            } else {
-                $error = "Invalid username or password";
-            }
-        }
-    }
+}
 ?>
-
-<html>
+ 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>login</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <table border="1" width="100%" cellspacing="0">
-        <tr>
-            <td align="left"><h2>XCompany</h2></td>
-            <td align="right">
-                <a href="publichome.php">Home</a> 
-                <a href="login.php">Login</a> 
-                <a href="registration.php">Registration</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form method="post" action="login.php">
-                    <fieldset>
-                        <legend>Log In</legend>
-                        
-                        <div style="color: red;"><?php echo $error; ?></div><br>
-
-                        Username: <input type="text" name="username" value="<?php echo $user_val; ?>"><br><br>
-                        Password: <input type="password" name="password" value=""><br> <br>
-                        
-                        <input type="checkbox" name="remember"> Remember Me <br><br>
-                        <input type="submit" name="submit" value="submit"> 
-                        <a href="forgotpassword.php">Forgot Password</a>
-                    </fieldset>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td align="center">Copyright &copy; 2017</td>
-        </tr>
-    </table>
+<div class="container">
+<div class="navBarParent">
+<div>
+<h1>X Company</h1>
+</div>
+<div class="links">
+<a href="index.php">Home</a>
+<a href="login.php">Login</a>
+<a href="registration.php">Registration</a>
+</div>
+</div>
+ 
+<div class="content">
+   <fieldset>
+    <legend>Login</legend>
+<form method="post">
+<table>
+<tr>
+<td>Username</td>
+<td>:</td>
+<td><input type="text" name="username"></td>
+</tr>
+</table>
+ 
+ <table>
+<tr>
+<td>Password</td>
+<td>:</td>
+<td><input type="password" name="password"></td>
+</tr>
+</table>
+<hr>
+ 
+ <input type="submit" value="Submit" name="submit" />
+<a href="forgotPassword.php">Forgot password?</a>
+</form>
+</fieldset>
+ 
+        </div>
+ 
+ <footer>
+        <p>Copyright © 2017</p>
+</footer>
+</div>
 </body>
 </html>

@@ -1,48 +1,57 @@
 <?php
     session_start();
-    
-    if(!isset($_SESSION['status'])){
-        header('location: login.php');
-        exit();
+
+    if(isset($_SESSION['current_user'])) {
+        $username = $_SESSION['current_user'];
     }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <table border="1" width="100%" cellspacing="0">
-        <tr>
-            <td align="left"><h2>XCompany</h2></td>
-            <td align="right">
-                Logged in as <?php echo $_SESSION['username']; ?> | <a href="logout.php">Logout</a>
-            </td>
-        </tr>
+    <div class="container">
+        <div class="navBarParent">
+            <div>
+                <h1>X Company</h1>
+            </div>
+            <div class="links">
+                <a href="index.php">Home</a>
+                <a href="login.php">Login</a>
+                <a href="registration.php">Registration</a>
+            </div>
+        </div>
 
-        <tr>
-            <td width="30%">
-                <b>Account</b>
+        <div class="content dashboardContent">
+            <div>
+                <h2>Account</h2>
                 <hr>
                 <ul>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="view_profile.php">View Profile</a></li>
-                    <li><a href="edit_profile.php">Edit Profile</a></li>
-                    <li><a href="change_pic.php">Change Profile Picture</a></li>
-                    <li><a href="change_pass.php">Change Password</a></li>
-                    <li><a href="logout.php">Logout</a></li>
+                    <a href="dashboard.php"><li>Dashboard</li></a>
+                    <a href="#"><li>View Profile</li></a>
+                    <a href="#"><li>Edit Profile</li></a>
+                    <a href="#"><li>Change Profile Picture</li></a>
+                    <a href="#"><li>Change Password</li></a>
+                    <a href="#"><li>Logout</li></a>
                 </ul>
-            </td>
+            </div>
 
-            <td height="200px">
-                <h3>Welcome <?php echo $_SESSION['username']; ?></h3>
-            </td>
-        </tr>
+            <div class="vl"></div>
 
-        <tr>
-            <td colspan="2" align="center">Copyright &copy; 2017</td>
-        </tr>
-    </table>
+            <div>
+                <h1>Welcome: <?php echo $username ?></h1>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>Copyright © 2017</p>
+        </footer>
+    </div>
 </body>
 </html>

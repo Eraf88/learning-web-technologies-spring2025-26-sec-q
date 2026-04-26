@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
          <h1>X Company</h1>
     </div>
     <div class="links">
-          <a href="index.php">Home</a>
+          <a href="public.html">Home</a>
            <a href="login.php">Login</a>
           <a href="registration.php">Registration</a>
     </div>

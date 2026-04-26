@@ -33,11 +33,11 @@
                 <hr>
                 <ul>
                     <a href="dashboard.php"><li>Dashboard</li></a>
-                    <a href="#"><li>View Profile</li></a>
-                    <a href="#"><li>Edit Profile</li></a>
-                    <a href="#"><li>Change Profile Picture</li></a>
-                    <a href="#"><li>Change Password</li></a>
-                    <a href="#"><li>Logout</li></a>
+                    <a href="viewprofile.php"><li>View Profile</li></a>
+                    <a href="editprofile.php"><li>Edit Profile</li></a>
+                    <a href="changeProfilePicture.php"><li>Change Profile Picture</li></a>
+                    <a href="changePassword.php"><li>Change Password</li></a>
+                    <a href="logout.php"><li>Logout</li></a>
                 </ul>
             </div>
 
